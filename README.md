@@ -1,12 +1,12 @@
 # Reflection Notes
 
-### 1.2 The result:
+### 1.2. Understanding how it works
 
 ![alt text](image-1.png)
 
 Dapat dilihat bahwa pada struktur file main.rs, `println!("Ravie's Computer: hey hey");` berada setelah `spawner.spawn(...)`. Namun, jika dilihat pada screenshot output, "Ravie's Computer: hey hey" muncul lebih dahulu. Hal ini terjadi karena "Ravie's Computer: hey hey" berada di luar async block. Maka dari itu, akan langsung dieksekusi tanpa dimasukkan ke queue eksekusi. Di sisi lain, statements yang berada pada async block baru akan dieksekusi ketika berada di line `executor.run();` yang berada setelah `println!("Ravie's Computer: hey hey");`. Hence, output yang diterima adalah "Ravie's Computer: hey hey" terlebih dahulu (di luar block async), baru setelah itu block async akan dijalankan yang kemudian menghasilkan output "Ravie's Computer: howdy!" dan "Ravie's Computer: done!".
 
-### 1.2 The result:
+### 1.3. Multiple Spawn and removing drop
 
 ![alt text](image-2.png)
 
